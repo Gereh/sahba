@@ -9,7 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-
-
+{
+    UIView* homeView;
+    UIView* showView;
+    UIView* dibView;
+    UIView* searchView;
+    UIView* favView;
+    UIView* faalView;
+    
+    UIImageView* homeImageView;
+    UIImageView* showImageView;
+    UIImageView* dibImageView;
+    UIImageView* searchImageView;
+    UIImageView* favImageView;
+    UIImageView* faalImageView;
+    
+    NSArray* buttonsTitle;
+    
+}
 @end
 
