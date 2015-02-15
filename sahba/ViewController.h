@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UIGestureRecognizerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
+    NSArray* verses;
+    NSInteger state;
     float ScreenHeight;
     float ScreenWidth;
     UIView* homeView;
@@ -18,6 +20,7 @@
     UIView* searchView;
     UIView* favView;
     UIView* faalView;
+    UIView* pickNumberView;
     
     UIImageView* homeImageView;
     UIImageView* showImageView;
@@ -30,8 +33,29 @@
     
     UIButton* shomareyeGhazalLabel;
     UITextView* ghazalTextView;
+    UITextField* pickTextField;
+    BOOL favoriteOn;
+    NSMutableArray* favoriteVerses;
+    UITableView* favoriteTable;
+    NSString* fileAddress;
     
-    UIButton* homeButton;
+    BOOL isSearching;
+    UITextField* searchTextField;
+    NSMutableArray* searchResult;
+    NSString* searchsearch;
+    UITableView* searchTable;
+    NSString* searchString;
+    NSInteger select;
+    
+    UIView* plusView;
+    BOOL plusIsOn;
+    
+    NSMutableArray* horizontalButtons;
+    NSMutableArray* verticalButtons;
+    
+    float fontState;
+    
+    UITapGestureRecognizer* tap;
     
     
 }
