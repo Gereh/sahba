@@ -10,6 +10,8 @@
 
 @interface ViewController : UIViewController
 {
+    float ScreenHeight;
+    float ScreenWidth;
     UIView* homeView;
     UIView* showView;
     UIView* dibView;
@@ -25,6 +27,12 @@
     UIImageView* faalImageView;
     
     NSArray* buttonsTitle;
+    
+    UIButton* shomareyeGhazalLabel;
+    UITextView* ghazalTextView;
+    
+    UIButton* homeButton;
+    
     
 }
 @end
