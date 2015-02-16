@@ -69,6 +69,9 @@
     int random;
     BOOL faalOn;
     
+    UISwipeGestureRecognizer* right;
+    UISwipeGestureRecognizer* left;
+    
     
     
 }

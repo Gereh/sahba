@@ -276,13 +276,13 @@
     favoriteBack.backgroundColor=[UIColor grayColor];
     [favView addSubview:favoriteBack];
     
-    faalBack=[[UIButton alloc]initWithFrame:CGRectMake(4*ScreenWidth/5, ScreenHeight/9, ScreenHeight/11,ScreenHeight/11)];
+    faalBack=[[UIButton alloc]initWithFrame:CGRectMake(4.95*ScreenWidth/6, ScreenHeight/40, ScreenHeight/11,ScreenHeight/11)];
     [faalBack addTarget:self action:@selector(faalBack:) forControlEvents:UIControlEventTouchUpInside];
-    [faalBack setTitle:@"home" forState:UIControlStateNormal];
-    faalBack.titleLabel.font=[UIFont fontWithName:@"Arial" size:15];
-    [faalBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [faalBack setTitle:@"home" forState:UIControlStateNormal];
+//    faalBack.titleLabel.font=[UIFont fontWithName:@"Arial" size:15];
+//    [faalBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     faalBack.layer.cornerRadius=ScreenHeight/22;
-    faalBack.backgroundColor=[UIColor grayColor];
+    faalBack.backgroundColor=[UIColor clearColor];
     [faalView addSubview:faalBack];
 
     // Do any additional setup after loading the view, typically from a nib.
@@ -293,6 +293,15 @@
     searchView.transform=CGAffineTransformMakeTranslation(searchView.frame.size.width, 0);
     favView.transform=CGAffineTransformMakeTranslation(-favView.frame.size.width, 0);
     dibView.transform=CGAffineTransformMakeTranslation(0, dibView.frame.size.height);
+    right=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleRightSwipe:)];
+    right.delegate=self;
+    [right setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:right];
+    left=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleLeftSwipe:)];
+    left.delegate=self;
+    [left setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:left];
+
 
     
 }
@@ -362,32 +371,42 @@
 }
 -(void)goToVerse{
     if (![pickTextField.text isEqualToString: @""]) {
+        pickTextField.backgroundColor=[UIColor whiteColor];
         if (1<=[pickTextField.text integerValue] && [pickTextField.text integerValue]<=495) {
             //NSLog(@"integer Value:%li",(long)[pickTextField.text integerValue]);
-        state=[pickTextField.text integerValue];
-        NSLog(@"%@",pickTextField.text);
-        BOOL alreadyHas=NO;
-        for (NSString* apart in favoriteVerses) {
-            if ([[NSString stringWithFormat:@"%li",(long)(state)] isEqualToString: apart]) {
-                alreadyHas=YES;
-                break;
+            state=[pickTextField.text integerValue];
+            NSLog(@"%@",pickTextField.text);
+            BOOL alreadyHas=NO;
+            for (NSString* apart in favoriteVerses) {
+                if ([[NSString stringWithFormat:@"%li",(long)(state)] isEqualToString: apart]) {
+                    alreadyHas=YES;
+                    break;
+                }
             }
+            if (!alreadyHas) {
+                ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+            }
+            else{
+                ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+            }
+            ghazalTextView.text=[verses objectAtIndex:state];
+            [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+            [UIView animateWithDuration:0.1 animations:^{
+                pickNumberView.alpha=0;
+            }];
+            [pickTextField resignFirstResponder];
+            pickTextField.text=nil;
+
         }
-        if (!alreadyHas) {
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
-        }
-        else{
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
-        }
-        ghazalTextView.text=[verses objectAtIndex:state];
-        [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+        
+
     }
-    }
-    
-    [UIView animateWithDuration:0.1 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         pickNumberView.alpha=0;
     }];
     [pickTextField resignFirstResponder];
+    pickTextField.text=nil;
+    
     
 }
 -(void)tapOnPlusView
@@ -501,7 +520,21 @@
         if (favoriteVerses.count> indexPath.row) {
                 select=((NSString*)[favoriteVerses objectAtIndex: indexPath.row]).integerValue;
         }
+        BOOL alreadyHas=NO;
         state=select;
+        for (NSString* apart in favoriteVerses) {
+            if ([[NSString stringWithFormat:@"%li",(long)(state)] isEqualToString: apart]) {
+                alreadyHas=YES;
+                break;
+            }
+        }
+        if (!alreadyHas) {
+            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+        }
+        else{
+            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+        }
+        [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
         ghazalTextView.text=[verses objectAtIndex:state];
         showView.transform=CGAffineTransformMakeTranslation(showView.frame.size.width, 0);
         [UIView animateWithDuration:0.4 animations:^{
@@ -802,4 +835,58 @@
         }
     }
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField==pickTextField) {
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+    }
+}
+
+- (void)handleRightSwipe:(UISwipeGestureRecognizer*)sender
+{
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight && state < 496){
+        state++;
+        BOOL alreadyHas=NO;
+        for (NSString* apart in favoriteVerses) {
+            if ([[NSString stringWithFormat:@"%li",(long)(state)] isEqualToString: apart]) {
+                alreadyHas=YES;
+                break;
+            }
+        }
+        if (!alreadyHas) {
+            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+        }
+        else{
+            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+        }
+
+       [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+        ghazalTextView.text=[verses objectAtIndex:state];
+    }
+    
+}
+-(void)handleLeftSwipe:(UISwipeGestureRecognizer*)sender
+{
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft && state > 1 ){
+        state--;
+        BOOL alreadyHas=NO;
+        for (NSString* apart in favoriteVerses) {
+            if ([[NSString stringWithFormat:@"%li",(long)(state)] isEqualToString: apart]) {
+                alreadyHas=YES;
+                break;
+            }
+        }
+        if (!alreadyHas) {
+            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+        }
+        else{
+            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+        }
+
+        [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+        ghazalTextView.text=[verses objectAtIndex:state];
+    }
+}
+
 @end
