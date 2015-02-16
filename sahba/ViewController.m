@@ -296,11 +296,12 @@
     right=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleRightSwipe:)];
     right.delegate=self;
     [right setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.view addGestureRecognizer:right];
+    
     left=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleLeftSwipe:)];
     left.delegate=self;
     [left setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:left];
+    [showView addGestureRecognizer:left];
+    [showView addGestureRecognizer:right];
 
 
     
