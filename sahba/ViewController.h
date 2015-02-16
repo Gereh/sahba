@@ -40,7 +40,7 @@
     NSString* fileAddress;
     
     BOOL isSearching;
-    UITextField* searchTextField;
+    UISearchBar* mySearchBar;
     NSMutableArray* searchResult;
     NSString* searchsearch;
     UITableView* searchTable;
@@ -56,6 +56,19 @@
     float fontState;
     
     UITapGestureRecognizer* tap;
+    UILabel* notFound;
+    
+    UITapGestureRecognizer* tapOnSearchView;
+    BOOL isOnShowPage;
+    UIButton* searchBack;
+    UITextView* zendeginaameTextView;
+    UIButton* favoriteBack;
+    UIButton* dibacheBack;
+    UIButton* faalBack;
+    
+    int random;
+    BOOL faalOn;
+    
     
     
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E8399AE21A90B61C009A9C80 /* hafez.txt in Resources */ = {isa = PBXBuildFile; fileRef = E8399AE11A90B61C009A9C80 /* hafez.txt */; };
+		E8547D981A91F67400E71085 /* zendeginameh.txt in Resources */ = {isa = PBXBuildFile; fileRef = E8547D971A91F67400E71085 /* zendeginameh.txt */; };
 		E8F873291A8A4428001C480C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F873281A8A4428001C480C /* main.m */; };
 		E8F8732C1A8A4428001C480C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F8732B1A8A4428001C480C /* AppDelegate.m */; };
 		E8F8732F1A8A4428001C480C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F8732E1A8A4428001C480C /* ViewController.m */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		E8399AE11A90B61C009A9C80 /* hafez.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hafez.txt; sourceTree = "<group>"; };
+		E8547D971A91F67400E71085 /* zendeginameh.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zendeginameh.txt; sourceTree = "<group>"; };
 		E8F873231A8A4428001C480C /* sahba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sahba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F873271A8A4428001C480C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8F873281A8A4428001C480C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				E8F8732B1A8A4428001C480C /* AppDelegate.m */,
 				E8F8732D1A8A4428001C480C /* ViewController.h */,
 				E8F8732E1A8A4428001C480C /* ViewController.m */,
+				E8547D971A91F67400E71085 /* zendeginameh.txt */,
 				E8F873301A8A4428001C480C /* Main.storyboard */,
 				E8F873561A8A4BAA001C480C /* fall-back.jpg */,
 				E8F8735A1A8A5802001C480C /* menu-key-back.jpg */,
@@ -240,6 +243,7 @@
 				E8F873591A8A4BAA001C480C /* fall.jpg in Resources */,
 				E8F873371A8A4428001C480C /* LaunchScreen.xib in Resources */,
 				E8F873511A8A486F001C480C /* home.jpg in Resources */,
+				E8547D981A91F67400E71085 /* zendeginameh.txt in Resources */,
 				E8F8735C1A8A5802001C480C /* menu-key-back.jpg in Resources */,
 				E8F873341A8A4428001C480C /* Images.xcassets in Resources */,
 			);
