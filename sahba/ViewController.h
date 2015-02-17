@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "NSString+NSStringPlus.h"
 
 
 @interface ViewController : UIViewController<UIGestureRecognizerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
+    
     NSArray* verses;
     NSInteger state;
     float ScreenHeight;

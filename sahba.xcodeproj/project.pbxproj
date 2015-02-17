@@ -22,6 +22,8 @@
 		E855AE091A9320FF00946EEB /* ghazal-num-back.png in Resources */ = {isa = PBXBuildFile; fileRef = E855AE081A9320FF00946EEB /* ghazal-num-back.png */; };
 		E855AE0E1A93234500946EEB /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = E855AE0C1A93234500946EEB /* left.png */; };
 		E855AE0F1A93234500946EEB /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = E855AE0D1A93234500946EEB /* right.png */; };
+		E855AE131A932AEA00946EEB /* irsans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E855AE0A1A93212A00946EEB /* irsans.ttf */; };
+		E855AE171A9331A300946EEB /* NSString+NSStringPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = E855AE161A9331A300946EEB /* NSString+NSStringPlus.m */; };
 		E8F873291A8A4428001C480C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F873281A8A4428001C480C /* main.m */; };
 		E8F8732C1A8A4428001C480C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F8732B1A8A4428001C480C /* AppDelegate.m */; };
 		E8F8732F1A8A4428001C480C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F8732E1A8A4428001C480C /* ViewController.m */; };
@@ -66,6 +68,8 @@
 		E855AE0A1A93212A00946EEB /* irsans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = irsans.ttf; sourceTree = "<group>"; };
 		E855AE0C1A93234500946EEB /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
 		E855AE0D1A93234500946EEB /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
+		E855AE151A9331A300946EEB /* NSString+NSStringPlus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NSStringPlus.h"; sourceTree = "<group>"; };
+		E855AE161A9331A300946EEB /* NSString+NSStringPlus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSStringPlus.m"; sourceTree = "<group>"; };
 		E8F873231A8A4428001C480C /* sahba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sahba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F873271A8A4428001C480C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8F873281A8A4428001C480C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -159,6 +163,15 @@
 			name = fonts;
 			sourceTree = "<group>";
 		};
+		E855AE141A93318400946EEB /* NSStirng Plus */ = {
+			isa = PBXGroup;
+			children = (
+				E855AE151A9331A300946EEB /* NSString+NSStringPlus.h */,
+				E855AE161A9331A300946EEB /* NSString+NSStringPlus.m */,
+			);
+			name = "NSStirng Plus";
+			sourceTree = "<group>";
+		};
 		E8F8731A1A8A4427001C480C = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +193,7 @@
 		E8F873251A8A4428001C480C /* sahba */ = {
 			isa = PBXGroup;
 			children = (
+				E855AE141A93318400946EEB /* NSStirng Plus */,
 				E855AE0B1A93212F00946EEB /* fonts */,
 				E855AE051A9318D800946EEB /* data */,
 				E855AE041A9318BA00946EEB /* image */,
@@ -302,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E855AE131A932AEA00946EEB /* irsans.ttf in Resources */,
 				E855AE0F1A93234500946EEB /* right.png in Resources */,
 				E8F873551A8A487E001C480C /* show.jpg in Resources */,
 				E855ADFB1A93184E00946EEB /* font-minus.png in Resources */,
@@ -346,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8F8732F1A8A4428001C480C /* ViewController.m in Sources */,
+				E855AE171A9331A300946EEB /* NSString+NSStringPlus.m in Sources */,
 				E8F8732C1A8A4428001C480C /* AppDelegate.m in Sources */,
 				E8F873291A8A4428001C480C /* main.m in Sources */,
 			);

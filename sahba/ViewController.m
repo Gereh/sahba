@@ -16,13 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+
     faalOn=NO;
     isOnShowPage=NO;
     plusIsOn=NO;
     isSearching=NO;
     favoriteOn=NO;
     state=1;
-    fontState=13;
+    fontState=10;
     ScreenHeight=self.view.frame.size.height;
     ScreenWidth=self.view.frame.size.width;
     
@@ -103,7 +105,12 @@
         
         [button setBackgroundImage:[UIImage imageNamed:@"menu-key-back.jpg"] forState:UIControlStateNormal];
         [button setTitle:[buttonsTitle objectAtIndex:i] forState:UIControlStateNormal];
+       
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        button.titleLabel.font=    [UIFont fontWithName:@"Iranian Sans" size:20];
+        
+       
         [homeView addSubview:button];
         [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -149,13 +156,14 @@
     shomareyeGhazalLabel=[[UIButton alloc]initWithFrame:CGRectMake(showView.frame.size.width/4, showView.frame.size.height/7, showView.frame.size.width/2, showView.frame.size.height/15)];
     //shomareyeGhazalLabel.backgroundColor=[UIColor blueColor];
     [shomareyeGhazalLabel setBackgroundImage:[UIImage imageNamed:@"ghazal-num-back.png"] forState:UIControlStateNormal];
-    [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+    [shomareyeGhazalLabel setTitle:[[NSString stringWithFormat:@"غزل شماره %li",(long)state] convertNumbersToPersian] forState:UIControlStateNormal];
+    shomareyeGhazalLabel.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:20];
     [shomareyeGhazalLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [showView addSubview:shomareyeGhazalLabel];
     
     ghazalTextView=[[UITextView alloc]initWithFrame:CGRectMake(showView.frame.size.width/6, showView.frame.size.height/4.5, 2*showView.frame.size.width/3, showView.frame.size.height-(showView.frame.size.height/2.8))];
     ghazalTextView.text=[verses objectAtIndex:state];
-    ghazalTextView.font=[UIFont fontWithName:@"Arial" size:fontState];
+    ghazalTextView.font=[UIFont fontWithName:@"Iranian Sans" size:fontState];
     ghazalTextView.editable=NO;
     ghazalTextView.textAlignment=NSTextAlignmentCenter;
     [showView addSubview:ghazalTextView];
@@ -186,7 +194,7 @@
     pickTextField=[[UITextField alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth/2-20, ScreenHeight/20)];
     pickTextField.borderStyle=UITextBorderStyleRoundedRect;
     pickTextField.placeholder=@"شماره غزل را وارد کنید...";
-    pickTextField.font=[UIFont fontWithName:@"Arial" size:12];
+    pickTextField.font=[UIFont fontWithName:@"Iranian Sans" size:12];
     pickTextField.textAlignment=NSTextAlignmentCenter;
     pickTextField.delegate=self;
     [pick addSubview:pickTextField];
@@ -198,7 +206,7 @@
     goButton.center=CGPointMake(pick.frame.size.width/2, pick.frame.size.height/2+10);
     [goButton setTitle:@"برو" forState:UIControlStateNormal];
     [goButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    goButton.titleLabel.font=[UIFont fontWithName:@"Arial" size:15];
+    goButton.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];;
     goButton.layer.cornerRadius=10;
     [goButton addTarget:self action:@selector(goToVerse) forControlEvents:UIControlEventTouchUpInside];
     
@@ -258,7 +266,7 @@
     zendeginaameTextView.text=zendeginame;
     //NSLog(@"%@",zendeginaameTextView.text);
     zendeginaameTextView.textAlignment=NSTextAlignmentJustified;
-    zendeginaameTextView.font=[UIFont fontWithName:@"Arial" size:14];
+    zendeginaameTextView.font=[UIFont fontWithName:@"Iranian Sans" size:13];
     zendeginaameTextView.editable=NO;
     zendeginaameTextView.layer.borderColor=[[UIColor colorWithRed:0.5 green:0.8 blue:0.9 alpha:1]CGColor];
     zendeginaameTextView.layer.borderWidth=4;
@@ -269,7 +277,7 @@
     dibacheBack=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/10, ScreenHeight/9, ScreenHeight/11,ScreenHeight/11)];
     [dibacheBack addTarget:self action:@selector(dibacheBack:) forControlEvents:UIControlEventTouchUpInside];
     [dibacheBack setTitle:@"home" forState:UIControlStateNormal];
-    dibacheBack.titleLabel.font=[UIFont fontWithName:@"Arial" size:15];
+    dibacheBack.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];;
     [dibacheBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     dibacheBack.layer.cornerRadius=ScreenHeight/22;
     dibacheBack.backgroundColor=[UIColor grayColor];
@@ -278,7 +286,7 @@
     favoriteBack=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/10, ScreenHeight/9, ScreenHeight/11,ScreenHeight/11)];
     [favoriteBack addTarget:self action:@selector(favoriteBack:) forControlEvents:UIControlEventTouchUpInside];
     [favoriteBack setTitle:@"home" forState:UIControlStateNormal];
-    favoriteBack.titleLabel.font=[UIFont fontWithName:@"Arial" size:15];
+    favoriteBack.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];
     [favoriteBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     favoriteBack.layer.cornerRadius=ScreenHeight/22;
     favoriteBack.backgroundColor=[UIColor grayColor];
@@ -402,7 +410,7 @@
                 [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
             }
             ghazalTextView.text=[verses objectAtIndex:state];
-            [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+            [shomareyeGhazalLabel setTitle:[[NSString stringWithFormat:@"غزل شماره %li",(long)state] convertNumbersToPersian] forState:UIControlStateNormal];
             [UIView animateWithDuration:0.1 animations:^{
                 pickNumberView.alpha=0;
             }];
@@ -495,7 +503,7 @@
         
     }
     cell.textLabel.textAlignment=NSTextAlignmentRight;
-    cell.textLabel.font=[UIFont fontWithName:@"Arial" size:15];
+    cell.textLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -526,7 +534,7 @@
             [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
         }
 
-        [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+        [shomareyeGhazalLabel setTitle:[[NSString stringWithFormat:@"غزل شماره %li",(long)state] convertNumbersToPersian] forState:UIControlStateNormal];
         
         showView.transform=CGAffineTransformMakeTranslation(-showView.frame.size.width, 0);
         [UIView animateWithDuration:0.4 animations:^{
@@ -554,7 +562,7 @@
         else{
             [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
         }
-        [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+        [shomareyeGhazalLabel setTitle:[[NSString stringWithFormat:@"غزل شماره %li",(long)state] convertNumbersToPersian] forState:UIControlStateNormal];
         ghazalTextView.text=[verses objectAtIndex:state];
         showView.transform=CGAffineTransformMakeTranslation(showView.frame.size.width, 0);
         [UIView animateWithDuration:0.4 animations:^{
@@ -692,15 +700,14 @@
 -(void)fontPlusAction{
     if (fontState < 16) {
         fontState++;
-        ghazalTextView.font=[UIFont fontWithName:@"Arial" size:fontState];
-
+        ghazalTextView.font=[UIFont fontWithName:@"Iranian Sans" size:fontState];
     }
 }
 -(void)fontMinusAction{
     
     if (fontState > 10) {
         fontState--;
-        ghazalTextView.font=[UIFont fontWithName:@"Arial" size:fontState];
+        ghazalTextView.font=[UIFont fontWithName:@"Iranian Sans" size:fontState];
     }
 }
 -(void)share:(UIButton*)sender
@@ -818,7 +825,7 @@
     random=arc4random() %495;
     state=random+1;
     ghazalTextView.text=[verses objectAtIndex:state];
-    [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+    [shomareyeGhazalLabel setTitle:[[NSString stringWithFormat:@"غزل شماره %li",(long)state] convertNumbersToPersian] forState:UIControlStateNormal];
     showView.transform=CGAffineTransformMakeTranslation(-showView.frame.size.width, 0);
     homeView.transform=CGAffineTransformMakeTranslation(homeView.frame.size.width, 0);
     BOOL alreadyHas=NO;
@@ -835,7 +842,7 @@
         [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
     }
     ghazalTextView.text=[verses objectAtIndex:state];
-    [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+    [shomareyeGhazalLabel setTitle:[[NSString stringWithFormat:@"غزل شماره %li",(long)state] convertNumbersToPersian] forState:UIControlStateNormal];
 
     [UIView animateWithDuration:0.4 animations:^{
         faalView.transform=CGAffineTransformMakeTranslation(faalView.frame.size.width, 0);
@@ -881,7 +888,7 @@
         [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
         }
 
-       [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+       [shomareyeGhazalLabel setTitle:[[NSString stringWithFormat:@"غزل شماره %li",(long)state] convertNumbersToPersian] forState:UIControlStateNormal];
         ghazalTextView.text=[verses objectAtIndex:state];
     }
     
@@ -905,7 +912,7 @@
             [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
         }
 
-        [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+        [shomareyeGhazalLabel setTitle:[[NSString stringWithFormat:@"غزل شماره %li",(long)state] convertNumbersToPersian] forState:UIControlStateNormal];
         ghazalTextView.text=[verses objectAtIndex:state];
     }
 }
