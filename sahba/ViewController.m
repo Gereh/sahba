@@ -291,7 +291,7 @@
     
     dibacheBack=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/10, ScreenHeight/9, ScreenHeight/11,ScreenHeight/11)];
     [dibacheBack addTarget:self action:@selector(dibacheBack:) forControlEvents:UIControlEventTouchUpInside];
-    dibacheBack.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];;
+    dibacheBack.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];
     dibacheBack.layer.cornerRadius=ScreenHeight/22;
     [dibacheBack setBackgroundImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
     [dibView addSubview:dibacheBack];
@@ -357,6 +357,7 @@
         isOnShowPage=NO;
         notFound.alpha=1;
         notFound.text=@"عبارت مورد نظر را جست و جو کنید";
+        notFound.font=[UIFont fontWithName:@"Iranian Sans" size:13];
         searchTable.alpha=0;
         [searchTable reloadData];
         isSearching=YES;
@@ -519,7 +520,7 @@
     
     
     cell.textLabel.textAlignment=NSTextAlignmentRight;
-    cell.textLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];
+    cell.textLabel.font=[UIFont fontWithName:@"Iranian Sans" size:11];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -780,6 +781,8 @@
     }
     else if (searchResult.count==0) {
         notFound.text=@"ای عزیز غزلت یافت نشد!";
+        notFound.font=[UIFont fontWithName:@"Iranian Sans" size:13];
+
         searchTable.alpha=0;
         notFound.alpha=1;
     }
