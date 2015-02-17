@@ -11,7 +11,7 @@
 #import "NSString+NSStringPlus.h"
 
 
-@interface ViewController : UIViewController<UIGestureRecognizerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface ViewController : UIViewController<UIGestureRecognizerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>
 {
     
     NSArray* verses;
@@ -79,6 +79,8 @@
     NSArray* horizontalIconImage;
     NSArray* verticalIconImage;
     UITapGestureRecognizer* tapOnNumbers;
+    
+    UIView* pick;
     
 }
 -(void)shakeView ;

@@ -104,11 +104,15 @@
         UIButton* button=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/4+ 10, ScreenHeight/3 + ScreenHeight/25+ ScreenHeight/8+i*ScreenHeight/15, 3.35*ScreenWidth/7 , ScreenHeight/15)];
         
         [button setBackgroundImage:[UIImage imageNamed:@"menu-key-back.jpg"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"menu-key-back.jpg"] forState:UIControlStateHighlighted];
+        [button setTitleColor:[UIColor colorWithRed:0.027 green:0.423 blue:0.603 alpha:1] forState:UIControlStateHighlighted];
+        
         [button setTitle:[buttonsTitle objectAtIndex:i] forState:UIControlStateNormal];
        
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         button.titleLabel.font=    [UIFont fontWithName:@"Iranian Sans" size:20];
+        
         
        
         [homeView addSubview:button];
@@ -186,15 +190,21 @@
     }
     
     pickNumberView=[[UIView alloc]initWithFrame:showView.frame];
-    pickNumberView.backgroundColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
-    UIView* pick=[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth/2, ScreenHeight/5)];
-    pick.backgroundColor=[UIColor whiteColor];
-    pick.layer.cornerRadius=10;
-    pick.layer.borderWidth=2;
-    pick.layer.borderColor=[[UIColor blackColor]CGColor];
+    pickNumberView.backgroundColor=[[UIColor whiteColor] colorWithAlphaComponent:0.7];
+    pick=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 5.5*ScreenWidth/8, 2*ScreenHeight/8 )];
     
-    pickTextField=[[UITextField alloc]initWithFrame:CGRectMake(10, 10, ScreenWidth/2-20, ScreenHeight/20)];
-    pickTextField.borderStyle=UITextBorderStyleRoundedRect;
+    UIImage* pickerViewBackgroundImage=[UIImage imageNamed:@"back2.png"];
+    UIImageView* pickerViewBackground=[[UIImageView alloc]initWithFrame:pick.frame];
+    pickerViewBackground.image=pickerViewBackgroundImage;
+    [pick addSubview:pickerViewBackground];
+
+    
+    pick.layer.cornerRadius=10;
+//    pick.layer.borderWidth=2;
+//    pick.layer.borderColor=[[UIColor blackColor]CGColor];
+//    
+    pickTextField=[[UITextField alloc]initWithFrame:CGRectMake(10, 1*pick.frame.size.height/3,  5*ScreenWidth/8, ScreenHeight/20)];
+    pickTextField.borderStyle=UITextBorderStyleNone;
     pickTextField.placeholder=@"شماره غزل را وارد کنید...";
     pickTextField.font=[UIFont fontWithName:@"Iranian Sans" size:12];
     pickTextField.textAlignment=NSTextAlignmentCenter;
@@ -203,13 +213,14 @@
     pick.center=CGPointMake(ScreenWidth/2, ScreenHeight/3);
     [pickNumberView addSubview:pick];
     
-    UIButton* goButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth/5, ScreenHeight/20)];
+    UIButton* goButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth/7, ScreenWidth/7)];
     goButton.backgroundColor=[UIColor blackColor];
-    goButton.center=CGPointMake(pick.frame.size.width/2, pick.frame.size.height/2+10);
+    goButton.center=CGPointMake(pick.frame.size.width/2, 2*pick.frame.size.height/3+10+5);
     [goButton setTitle:@"برو" forState:UIControlStateNormal];
-    [goButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [goButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [goButton setBackgroundImage:[UIImage imageNamed:@"go.png"] forState:UIControlStateNormal];
     goButton.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];;
-    goButton.layer.cornerRadius=10;
+    goButton.layer.cornerRadius=ScreenWidth/14;
     [goButton addTarget:self action:@selector(goToVerse) forControlEvents:UIControlEventTouchUpInside];
     
     [pick addSubview:goButton];
@@ -218,7 +229,7 @@
     
     
     plusView=[[UIView alloc]initWithFrame:self.view.frame];
-    plusView.backgroundColor=[[UIColor whiteColor]colorWithAlphaComponent:0.5];
+    plusView.backgroundColor=[[UIColor whiteColor]colorWithAlphaComponent:0.7];
     NSArray* ButtonsOnPlus=[[NSArray alloc]initWithObjects:@"T+",@"T-",@"share", nil];
     verticalButtons=[[NSMutableArray alloc]init];
     for (int i=0; i<[ButtonsOnPlus count]; i++) {
@@ -235,6 +246,7 @@
     [showView addSubview:plusView];
     [showView bringSubviewToFront:[horizontalButtons objectAtIndex:4]];
     tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOnPlusView)];
+    tap.delegate=self;
     [plusView addGestureRecognizer:tap];
     plusView.alpha=0;
     if ([favoriteVerses containsObject:@"1"]) {
@@ -298,6 +310,7 @@
     [faalView addSubview:faalBack];
     
     tapOnNumbers=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismiss123:)];
+    tapOnNumbers.delegate=self;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -330,6 +343,7 @@
     return YES;
 }
 -(void)buttonClicked:(UIButton*)sender{
+   // [sender setEnabled:NO];
     isOnShowPage=YES;
     showView.transform=CGAffineTransformMakeTranslation(-showView.frame.size.width, 0);
     if ([sender.titleLabel.text isEqualToString:@"غزل"]) {
@@ -627,6 +641,8 @@
         pickNumberView.alpha=1;
     }];
     [pickNumberView addGestureRecognizer:tapOnNumbers];
+    [pick removeGestureRecognizer:tapOnNumbers];
+    
 }
 -(void)addToFavorite:(UIButton*)sender;
 {
@@ -956,6 +972,8 @@
 {
     pickNumberView.alpha=0;
     [pickNumberView removeGestureRecognizer:tapOnNumbers];
+    [pickTextField resignFirstResponder];
+    
 }
 
 @end
