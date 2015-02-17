@@ -78,7 +78,7 @@
     
     NSArray* horizontalIconImage;
     NSArray* verticalIconImage;
-    
+    UITapGestureRecognizer* tapOnNumbers;
     
 }
 -(void)shakeView ;

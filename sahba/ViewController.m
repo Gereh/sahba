@@ -94,7 +94,7 @@
     logoView.image=[UIImage imageNamed:@"menu-logo.jpg"];
  
     [homeView addSubview:logoView];
-    buttonsTitle=[[NSArray alloc]initWithObjects:@"غزل",@"دیباچه",@"فال",@"جست و جو",@"علاقه مندی ها", nil];
+    buttonsTitle=[[NSArray alloc]initWithObjects:@"غزل",@"زندگی نامه",@"فال",@"جست و جو",@"علاقه مندی ها", nil];
    
     
     NSLog(@"height:%f",ScreenHeight);  NSLog(@"height:%f",ScreenWidth);
@@ -118,9 +118,12 @@
     //adding search table to search view
     searchResult=[[NSMutableArray alloc]init];
     mySearchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(ScreenWidth/4.5,ScreenHeight/3.5,2*ScreenWidth/3, ScreenHeight/18)];
-    mySearchBar.layer.borderColor=[[UIColor blackColor]CGColor];
-    mySearchBar.layer.borderWidth=2;
+//    mySearchBar.layer.borderColor=[[UIColor blackColor]CGColor];
+//    mySearchBar.layer.borderWidth=2;
     mySearchBar.delegate=self;
+    [mySearchBar setBackgroundImage:[UIImage imageNamed:@"menu-key-back.jpg"]];
+    [mySearchBar setTranslucent:YES];
+
     [searchView addSubview:mySearchBar];
     UIButton* searchButton=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/2+ScreenWidth/9, ScreenHeight/2.8, ScreenWidth/4,ScreenHeight/18)];
     searchButton.layer.cornerRadius=10;
@@ -132,16 +135,15 @@
     //[searchView addSubview:searchButton];
     searchBack=[[UIButton alloc]initWithFrame:CGRectMake(4*ScreenWidth/5, ScreenHeight/9, ScreenHeight/11,ScreenHeight/11)];
     [searchBack addTarget:self action:@selector(searchBack:) forControlEvents:UIControlEventTouchUpInside];
-    [searchBack setTitle:@"home" forState:UIControlStateNormal];
-    searchBack.titleLabel.font=[UIFont fontWithName:@"Arial" size:15];
-    [searchBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [searchBack setBackgroundImage:[UIImage imageNamed:@"left.png"] forState:UIControlStateNormal];
     searchBack.layer.cornerRadius=ScreenHeight/22;
     searchBack.backgroundColor=[UIColor grayColor];
     [searchView addSubview:searchBack];
-    searchTable=[[UITableView alloc]initWithFrame:CGRectMake(ScreenWidth/4.5,ScreenHeight/2.3,2*ScreenWidth/3, ScreenHeight/2) style:UITableViewStylePlain];
+    searchTable=[[UITableView alloc]initWithFrame:CGRectMake(ScreenWidth/4.5,ScreenHeight/2.8,2*ScreenWidth/3, ScreenHeight/2) style:UITableViewStylePlain];
+    
     searchResult=[[NSMutableArray alloc]init];
-    searchTable.layer.borderColor=[[UIColor blackColor]CGColor];
-    searchTable.layer.borderWidth=2;
+//    searchTable.layer.borderColor=[[UIColor blackColor]CGColor];
+//    searchTable.layer.borderWidth=2;
     searchTable.delegate=self;
     searchTable.dataSource=self;
     [searchTable setAllowsSelection:YES];
@@ -224,7 +226,6 @@
         [button setTitle:[ButtonsOnPlus objectAtIndex:i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         button.layer.cornerRadius=ScreenWidth/14;
-       // button.backgroundColor=[UIColor redColor];
         [button setBackgroundImage:[verticalIconImage objectAtIndex:i] forState:UIControlStateNormal];
         [plusView addSubview:button];
         button.alpha=0;
@@ -243,13 +244,17 @@
     // creating favorite table
     UIButton* favoriteTableTitle=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/9,ScreenHeight/4,2*ScreenWidth/3, ScreenHeight/18)];
     [favoriteTableTitle setTitle:@"غزل های مورد علاقه" forState:UIControlStateNormal];
+
+    favoriteTableTitle.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:18];
+
+    
     [favoriteTableTitle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    favoriteTableTitle.layer.borderWidth=2;
-    favoriteTableTitle.layer.borderColor=[[UIColor blackColor]CGColor];
+    [favoriteTableTitle setBackgroundImage:[UIImage imageNamed:@"ghazal-num-back.png"] forState:UIControlStateNormal ];
+    
     [favView addSubview:favoriteTableTitle];
     favoriteTable=[[UITableView alloc]initWithFrame:CGRectMake(ScreenWidth/9,ScreenHeight/3,2*ScreenWidth/3, ScreenHeight/2) style:UITableViewStylePlain];
-    favoriteTable.layer.borderColor=[[UIColor blackColor]CGColor];
-    favoriteTable.layer.borderWidth=2;
+//    favoriteTable.layer.borderColor=[[UIColor blackColor]CGColor];
+//    favoriteTable.layer.borderWidth=2;
     favoriteTable.delegate=self;
     favoriteTable.dataSource=self;
     [favoriteTable setAllowsSelection:YES];
@@ -261,46 +266,38 @@
     
     NSString* zendeginameAddress=[[NSBundle mainBundle]pathForResource:@"zendeginameh" ofType:@"txt"];
     NSString* zendeginame=[NSString stringWithContentsOfFile:zendeginameAddress encoding:NSUTF8StringEncoding error:nil];
-    zendeginaameTextView=[[UITextView alloc] initWithFrame:CGRectMake(ScreenWidth/7, ScreenHeight/6, 5*ScreenWidth/7, 4.4*ScreenHeight/8)];
+    zendeginaameTextView=[[UITextView alloc] initWithFrame:CGRectMake(ScreenWidth/7, ScreenHeight/5, 5*ScreenWidth/7, 4.3*ScreenHeight/8)];
     
     zendeginaameTextView.text=zendeginame;
-    //NSLog(@"%@",zendeginaameTextView.text);
     zendeginaameTextView.textAlignment=NSTextAlignmentJustified;
     zendeginaameTextView.font=[UIFont fontWithName:@"Iranian Sans" size:13];
     zendeginaameTextView.editable=NO;
-    zendeginaameTextView.layer.borderColor=[[UIColor colorWithRed:0.5 green:0.8 blue:0.9 alpha:1]CGColor];
-    zendeginaameTextView.layer.borderWidth=4;
+
     UIBezierPath* aObjBezierPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 20, 20)];
     zendeginaameTextView.textContainer.exclusionPaths = @[aObjBezierPath];
     [dibView addSubview:zendeginaameTextView];
     
     dibacheBack=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/10, ScreenHeight/9, ScreenHeight/11,ScreenHeight/11)];
     [dibacheBack addTarget:self action:@selector(dibacheBack:) forControlEvents:UIControlEventTouchUpInside];
-    [dibacheBack setTitle:@"home" forState:UIControlStateNormal];
     dibacheBack.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];;
-    [dibacheBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     dibacheBack.layer.cornerRadius=ScreenHeight/22;
-    dibacheBack.backgroundColor=[UIColor grayColor];
+    [dibacheBack setBackgroundImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
     [dibView addSubview:dibacheBack];
     
     favoriteBack=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/10, ScreenHeight/9, ScreenHeight/11,ScreenHeight/11)];
     [favoriteBack addTarget:self action:@selector(favoriteBack:) forControlEvents:UIControlEventTouchUpInside];
-    [favoriteBack setTitle:@"home" forState:UIControlStateNormal];
-    favoriteBack.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];
-    [favoriteBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [favoriteBack setBackgroundImage:[UIImage imageNamed:@"right.png"] forState:UIControlStateNormal];
     favoriteBack.layer.cornerRadius=ScreenHeight/22;
     favoriteBack.backgroundColor=[UIColor grayColor];
     [favView addSubview:favoriteBack];
     
     faalBack=[[UIButton alloc]initWithFrame:CGRectMake(4.95*ScreenWidth/6, ScreenHeight/40, ScreenHeight/11,ScreenHeight/11)];
     [faalBack addTarget:self action:@selector(faalBack:) forControlEvents:UIControlEventTouchUpInside];
-//    [faalBack setTitle:@"home" forState:UIControlStateNormal];
-//    faalBack.titleLabel.font=[UIFont fontWithName:@"Arial" size:15];
-//    [faalBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     faalBack.layer.cornerRadius=ScreenHeight/22;
     faalBack.backgroundColor=[UIColor clearColor];
     [faalView addSubview:faalBack];
-
+    
+    tapOnNumbers=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismiss123:)];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -367,7 +364,7 @@
         }];
         
     }
-    else if ([sender.titleLabel.text isEqualToString:@"دیباچه"]) {
+    else if ([sender.titleLabel.text isEqualToString:@"زندگی نامه"]) {
         dibView.transform=CGAffineTransformMakeTranslation(0, dibView.frame.size.height);
         [UIView animateWithDuration:0.4 animations:^{
             dibView.transform=CGAffineTransformMakeTranslation(0, 0);
@@ -502,6 +499,11 @@
         cell.textLabel.text=[versComp objectAtIndex:2];
         
     }
+    
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [tableView setSeparatorColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"line.png"]]];
+    
+    
     cell.textLabel.textAlignment=NSTextAlignmentRight;
     cell.textLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];
     return cell;
@@ -624,6 +626,7 @@
     [UIView animateWithDuration:0.1 animations:^{
         pickNumberView.alpha=1;
     }];
+    [pickNumberView addGestureRecognizer:tapOnNumbers];
 }
 -(void)addToFavorite:(UIButton*)sender;
 {
@@ -930,6 +933,29 @@
     [pickTextField.layer addAnimation:shake forKey:@"position"];
    
     
+}
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+}
+-(void)dismiss123:(UIGestureRecognizer*)sender
+{
+    pickNumberView.alpha=0;
+    [pickNumberView removeGestureRecognizer:tapOnNumbers];
 }
 
 @end
