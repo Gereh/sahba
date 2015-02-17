@@ -26,6 +26,9 @@
     ScreenHeight=self.view.frame.size.height;
     ScreenWidth=self.view.frame.size.width;
     
+    horizontalIconImage=[[NSArray alloc]initWithObjects:[UIImage imageNamed:@"home.png"],[UIImage imageNamed:@"go-num.png"],[UIImage imageNamed:@"like.png"],[UIImage imageNamed:@"search.png"],[UIImage imageNamed:@"plus.png"], nil];
+    verticalIconImage=[[NSArray alloc]initWithObjects:[UIImage imageNamed:@"font-plus.png"], [UIImage imageNamed:@"font-minus.png"],[UIImage imageNamed:@"share.png"], nil];
+    
     NSString* homeDirectory=NSHomeDirectory();
     NSString* documentDirectory=[homeDirectory stringByAppendingPathComponent:@"Documents"];
     NSLog(@"%@",documentDirectory);
@@ -144,8 +147,10 @@
     //creating subviews of show view
     
     shomareyeGhazalLabel=[[UIButton alloc]initWithFrame:CGRectMake(showView.frame.size.width/4, showView.frame.size.height/7, showView.frame.size.width/2, showView.frame.size.height/15)];
-    shomareyeGhazalLabel.backgroundColor=[UIColor blueColor];
+    //shomareyeGhazalLabel.backgroundColor=[UIColor blueColor];
+    [shomareyeGhazalLabel setBackgroundImage:[UIImage imageNamed:@"ghazal-num-back.png"] forState:UIControlStateNormal];
     [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
+    [shomareyeGhazalLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [showView addSubview:shomareyeGhazalLabel];
     
     ghazalTextView=[[UITextView alloc]initWithFrame:CGRectMake(showView.frame.size.width/6, showView.frame.size.height/4.5, 2*showView.frame.size.width/3, showView.frame.size.height-(showView.frame.size.height/2.8))];
@@ -159,12 +164,14 @@
     for (int i=0; i<[showPageButtons count]; i++) {
         UIButton* button=[[UIButton alloc]initWithFrame:CGRectMake(i*ScreenWidth/6 +ScreenWidth/10.5, ScreenHeight/1.12, ScreenWidth/6.5, ScreenWidth/6.5)];
         [button setTitle:[showPageButtons objectAtIndex:i] forState:UIControlStateNormal];
-        //[button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         button.layer.cornerRadius= ScreenWidth/13;
         button.backgroundColor=[UIColor blueColor];
-        button.titleLabel.font=[UIFont fontWithName:@"Arial" size:12];
+        //button.titleLabel.font=[UIFont fontWithName:@"Arial" size:12];
+        [button setBackgroundImage:[horizontalIconImage objectAtIndex:i] forState:UIControlStateNormal];
         [showView addSubview:button];
         [button addTarget:self action:@selector(horizontalButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
         [horizontalButtons addObject:button];
     }
     
@@ -207,9 +214,10 @@
     for (int i=0; i<[ButtonsOnPlus count]; i++) {
         UIButton* button=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/1.3, ScreenHeight/1.3 -(i*ScreenHeight/9), ScreenWidth/7, ScreenWidth/7)];
         [button setTitle:[ButtonsOnPlus objectAtIndex:i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         button.layer.cornerRadius=ScreenWidth/14;
-        button.backgroundColor=[UIColor redColor];
+       // button.backgroundColor=[UIColor redColor];
+        [button setBackgroundImage:[verticalIconImage objectAtIndex:i] forState:UIControlStateNormal];
         [plusView addSubview:button];
         button.alpha=0;
         [verticalButtons addObject:button];
@@ -221,7 +229,7 @@
     [plusView addGestureRecognizer:tap];
     plusView.alpha=0;
     if ([favoriteVerses containsObject:@"1"]) {
-        ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+        [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
     }
     
     // creating favorite table
@@ -385,10 +393,13 @@
                 }
             }
             if (!alreadyHas) {
-                ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+                [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"like.png"] forState:UIControlStateNormal ];
+                NSLog(@"not already has");
             }
             else{
-                ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+                NSLog(@"already has");
+
+                [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
             }
             ghazalTextView.text=[verses objectAtIndex:state];
             [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
@@ -397,16 +408,24 @@
             }];
             [pickTextField resignFirstResponder];
             pickTextField.text=nil;
+            [UIView animateWithDuration:0.2 animations:^{
+                pickNumberView.alpha=0;
+            }];
+            [pickTextField resignFirstResponder];
+            pickTextField.text=nil;
 
         }
+        else{
+                [self shakeView];
+            pickTextField.text=@"";
+            
         
+        }
+         
+    
 
     }
-    [UIView animateWithDuration:0.2 animations:^{
-        pickNumberView.alpha=0;
-    }];
-    [pickTextField resignFirstResponder];
-    pickTextField.text=nil;
+    
     
     
 }
@@ -500,11 +519,11 @@
         }
         if (!alreadyHas) {
             NSLog(@"has not");
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+            [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"like.png"] forState:UIControlStateNormal ];
         }
         else{
             NSLog(@"has");
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+            [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
         }
 
         [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
@@ -530,10 +549,10 @@
             }
         }
         if (!alreadyHas) {
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+            [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"like.png"] forState:UIControlStateNormal ];
         }
         else{
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+            [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
         }
         [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
         ghazalTextView.text=[verses objectAtIndex:state];
@@ -609,12 +628,12 @@
     }
     if (!alreadyHas) {
         [favoriteVerses addObject:[NSString stringWithFormat:@"%li",(long)state]];
-        sender.backgroundColor=[UIColor yellowColor];
+        [sender setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal];
         // [sender setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
     }
     else{
         [favoriteVerses removeObject:[NSString stringWithFormat:@"%li",(long)state]];
-        sender.backgroundColor=[UIColor blueColor];
+        [sender setBackgroundImage:[UIImage imageNamed:@"like.png"] forState:UIControlStateNormal];
         //[sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     [favoriteVerses writeToFile:fileAddress atomically:YES];
@@ -622,6 +641,7 @@
 -(void)plusButtonClicked
 {
     if (!plusIsOn) {
+        [((UIButton*)[horizontalButtons objectAtIndex:4]) setBackgroundImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
         [UIView animateWithDuration:0.2 animations:^{
             plusView.alpha=1;
         }completion:^(BOOL finished) {
@@ -642,6 +662,7 @@
     }
     else
     {
+        [((UIButton*)[horizontalButtons objectAtIndex:4]) setBackgroundImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateNormal];
         [UIView animateWithDuration:0.1 animations:^{
             plusView.alpha=0;
         }completion:^(BOOL finished) {
@@ -808,10 +829,10 @@
         }
     }
     if (!alreadyHas) {
-        ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+        [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"like.png"] forState:UIControlStateNormal ];
     }
     else{
-        ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+        [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
     }
     ghazalTextView.text=[verses objectAtIndex:state];
     [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
@@ -855,10 +876,9 @@
             }
         }
         if (!alreadyHas) {
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
-        }
+            [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"like.png"] forState:UIControlStateNormal ];        }
         else{
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+        [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
         }
 
        [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
@@ -879,15 +899,30 @@
             }
         }
         if (!alreadyHas) {
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor blueColor];
+            [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"like.png"] forState:UIControlStateNormal ];
         }
         else{
-            ((UIButton*)[horizontalButtons objectAtIndex:2]).backgroundColor=[UIColor yellowColor];
+            [((UIButton*)[horizontalButtons objectAtIndex:2]) setBackgroundImage:[UIImage imageNamed:@"liked.png"] forState:UIControlStateNormal ];
         }
 
         [shomareyeGhazalLabel setTitle:[NSString stringWithFormat:@"غزل شماره %li",(long)state] forState:UIControlStateNormal];
         ghazalTextView.text=[verses objectAtIndex:state];
     }
+}
+
+-(void)shakeView {
+    
+    CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"position"];
+    [shake setDuration:0.05];
+    [shake setRepeatCount:2];
+    [shake setAutoreverses:YES];
+    [shake setFromValue:[NSValue valueWithCGPoint:
+                         CGPointMake(pickTextField.center.x - 5,pickTextField.center.y)]];
+    [shake setToValue:[NSValue valueWithCGPoint:
+                       CGPointMake(pickTextField.center.x + 5, pickTextField.center.y)]];
+    [pickTextField.layer addAnimation:shake forKey:@"position"];
+   
+    
 }
 
 @end

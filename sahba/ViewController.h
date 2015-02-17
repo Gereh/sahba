@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
 
 @interface ViewController : UIViewController<UIGestureRecognizerDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
@@ -72,8 +74,12 @@
     UISwipeGestureRecognizer* right;
     UISwipeGestureRecognizer* left;
     
+    NSArray* horizontalIconImage;
+    NSArray* verticalIconImage;
     
     
 }
+-(void)shakeView ;
+
 @end
 
