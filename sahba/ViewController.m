@@ -146,8 +146,7 @@
     searchTable=[[UITableView alloc]initWithFrame:CGRectMake(ScreenWidth/4.5,ScreenHeight/2.8,2*ScreenWidth/3, ScreenHeight/2) style:UITableViewStylePlain];
     
     searchResult=[[NSMutableArray alloc]init];
-//    searchTable.layer.borderColor=[[UIColor blackColor]CGColor];
-//    searchTable.layer.borderWidth=2;
+
     searchTable.delegate=self;
     searchTable.dataSource=self;
     [searchTable setAllowsSelection:YES];
@@ -158,6 +157,17 @@
     [searchView addSubview:searchTable];
     searchTable.alpha=0;
     //creating subviews of show view
+    next=[[UIButton alloc]initWithFrame:CGRectMake(0.9*showView.frame.size.width/7, showView.frame.size.height/7, showView.frame.size.height/15, showView.frame.size.height/15)];
+    [next setBackgroundImage:[UIImage imageNamed:@"left.png"] forState:UIControlStateNormal];
+    next.layer.cornerRadius=(showView.frame.size.height/15)/2;
+    [next addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
+    [showView addSubview:next];
+    
+    previous=[[UIButton alloc]initWithFrame:CGRectMake(5.3*showView.frame.size.width/7, showView.frame.size.height/7, showView.frame.size.height/15, showView.frame.size.height/15)];
+    [previous setBackgroundImage:[UIImage imageNamed:@"right.png"] forState:UIControlStateNormal];
+    previous.layer.cornerRadius=(showView.frame.size.height/15)/2;
+    [previous addTarget:self action:@selector(goToPrevious:) forControlEvents:UIControlEventTouchUpInside];
+    [showView addSubview:previous];
     
     shomareyeGhazalLabel=[[UIButton alloc]initWithFrame:CGRectMake(showView.frame.size.width/4, showView.frame.size.height/7, showView.frame.size.width/2, showView.frame.size.height/15)];
     //shomareyeGhazalLabel.backgroundColor=[UIColor blueColor];
@@ -200,9 +210,7 @@
 
     
     pick.layer.cornerRadius=10;
-//    pick.layer.borderWidth=2;
-//    pick.layer.borderColor=[[UIColor blackColor]CGColor];
-//    
+   
     pickTextField=[[UITextField alloc]initWithFrame:CGRectMake(10, 1*pick.frame.size.height/3,  5*ScreenWidth/8, ScreenHeight/20)];
     pickTextField.borderStyle=UITextBorderStyleNone;
     pickTextField.placeholder=@"شماره غزل را وارد کنید...";
@@ -265,8 +273,7 @@
     
     [favView addSubview:favoriteTableTitle];
     favoriteTable=[[UITableView alloc]initWithFrame:CGRectMake(ScreenWidth/9,ScreenHeight/3,2*ScreenWidth/3, ScreenHeight/2) style:UITableViewStylePlain];
-//    favoriteTable.layer.borderColor=[[UIColor blackColor]CGColor];
-//    favoriteTable.layer.borderWidth=2;
+
     favoriteTable.delegate=self;
     favoriteTable.dataSource=self;
     [favoriteTable setAllowsSelection:YES];
@@ -291,7 +298,7 @@
     
     dibacheBack=[[UIButton alloc]initWithFrame:CGRectMake(ScreenWidth/10, ScreenHeight/9, ScreenHeight/11,ScreenHeight/11)];
     [dibacheBack addTarget:self action:@selector(dibacheBack:) forControlEvents:UIControlEventTouchUpInside];
-    dibacheBack.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];
+    dibacheBack.titleLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];;
     dibacheBack.layer.cornerRadius=ScreenHeight/22;
     [dibacheBack setBackgroundImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
     [dibView addSubview:dibacheBack];
@@ -319,18 +326,6 @@
     searchView.transform=CGAffineTransformMakeTranslation(searchView.frame.size.width, 0);
     favView.transform=CGAffineTransformMakeTranslation(-favView.frame.size.width, 0);
     dibView.transform=CGAffineTransformMakeTranslation(0, dibView.frame.size.height);
-    right=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleRightSwipe:)];
-    right.delegate=self;
-    [right setDirection:UISwipeGestureRecognizerDirectionRight];
-    
-    left=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleLeftSwipe:)];
-    left.delegate=self;
-    [left setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [showView addGestureRecognizer:left];
-    [showView addGestureRecognizer:right];
-
-
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -357,7 +352,6 @@
         isOnShowPage=NO;
         notFound.alpha=1;
         notFound.text=@"عبارت مورد نظر را جست و جو کنید";
-        notFound.font=[UIFont fontWithName:@"Iranian Sans" size:13];
         searchTable.alpha=0;
         [searchTable reloadData];
         isSearching=YES;
@@ -520,7 +514,7 @@
     
     
     cell.textLabel.textAlignment=NSTextAlignmentRight;
-    cell.textLabel.font=[UIFont fontWithName:@"Iranian Sans" size:11];
+    cell.textLabel.font=[UIFont fontWithName:@"Iranian Sans" size:15];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -733,7 +727,7 @@
 -(void)share:(UIButton*)sender
 {
     NSString *textToShare=ghazalTextView.text;
-    NSURL *myWebsite = [NSURL URLWithString:@""];
+    NSURL *myWebsite = [NSURL URLWithString:@"http://www.google.com"];
     
     UIActivityViewController *activityViewController =
     [[UIActivityViewController alloc] initWithActivityItems:@[textToShare,myWebsite ]
@@ -781,8 +775,6 @@
     }
     else if (searchResult.count==0) {
         notFound.text=@"ای عزیز غزلت یافت نشد!";
-        notFound.font=[UIFont fontWithName:@"Iranian Sans" size:13];
-
         searchTable.alpha=0;
         notFound.alpha=1;
     }
@@ -892,10 +884,10 @@
     }
 }
 
-- (void)handleRightSwipe:(UISwipeGestureRecognizer*)sender
+- (void)goToNext:(UIButton*)sender
 {
     
-    if (sender.direction == UISwipeGestureRecognizerDirectionRight && state < 496){
+    if (state < 496){
         state++;
         BOOL alreadyHas=NO;
         for (NSString* apart in favoriteVerses) {
@@ -915,10 +907,10 @@
     }
     
 }
--(void)handleLeftSwipe:(UISwipeGestureRecognizer*)sender
+-(void)goToPrevious:(UIButton*)sender
 {
     
-    if (sender.direction == UISwipeGestureRecognizerDirectionLeft && state > 1 ){
+    if (state > 1 ){
         state--;
         BOOL alreadyHas=NO;
         for (NSString* apart in favoriteVerses) {

@@ -82,6 +82,8 @@
     
     UIView* pick;
     
+    UIButton*next;
+    UIButton* previous;
 }
 -(void)shakeView ;
 
