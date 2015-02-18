@@ -24,7 +24,7 @@
     isSearching=NO;
     favoriteOn=NO;
     state=1;
-    fontState=10;
+    fontState=11;
     ScreenHeight=self.view.frame.size.height;
     ScreenWidth=self.view.frame.size.width;
     
@@ -121,7 +121,7 @@
     
     //adding search table to search view
     searchResult=[[NSMutableArray alloc]init];
-    mySearchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(ScreenWidth/4.5,ScreenHeight/3.5,2*ScreenWidth/3, ScreenHeight/18)];
+    mySearchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(ScreenWidth/4.5,ScreenHeight/3.5,2*ScreenWidth/3, 1.5*ScreenHeight/18)];
 //    mySearchBar.layer.borderColor=[[UIColor blackColor]CGColor];
 //    mySearchBar.layer.borderWidth=2;
     mySearchBar.delegate=self;
@@ -156,18 +156,7 @@
     [searchView addSubview:notFound];
     [searchView addSubview:searchTable];
     searchTable.alpha=0;
-    //creating subviews of show view
-    next=[[UIButton alloc]initWithFrame:CGRectMake(0.9*showView.frame.size.width/7, showView.frame.size.height/7, showView.frame.size.height/15, showView.frame.size.height/15)];
-    [next setBackgroundImage:[UIImage imageNamed:@"left.png"] forState:UIControlStateNormal];
-    next.layer.cornerRadius=(showView.frame.size.height/15)/2;
-    [next addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
-    [showView addSubview:next];
     
-    previous=[[UIButton alloc]initWithFrame:CGRectMake(5.3*showView.frame.size.width/7, showView.frame.size.height/7, showView.frame.size.height/15, showView.frame.size.height/15)];
-    [previous setBackgroundImage:[UIImage imageNamed:@"right.png"] forState:UIControlStateNormal];
-    previous.layer.cornerRadius=(showView.frame.size.height/15)/2;
-    [previous addTarget:self action:@selector(goToPrevious:) forControlEvents:UIControlEventTouchUpInside];
-    [showView addSubview:previous];
     
     shomareyeGhazalLabel=[[UIButton alloc]initWithFrame:CGRectMake(showView.frame.size.width/4, showView.frame.size.height/7, showView.frame.size.width/2, showView.frame.size.height/15)];
     //shomareyeGhazalLabel.backgroundColor=[UIColor blueColor];
@@ -177,9 +166,10 @@
     [shomareyeGhazalLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [showView addSubview:shomareyeGhazalLabel];
     
-    ghazalTextView=[[UITextView alloc]initWithFrame:CGRectMake(showView.frame.size.width/6, showView.frame.size.height/4.5, 2*showView.frame.size.width/3, showView.frame.size.height-(showView.frame.size.height/2.8))];
+    ghazalTextView=[[UITextView alloc]initWithFrame:CGRectMake(showView.frame.size.width/7, showView.frame.size.height/4.5, 2.15*showView.frame.size.width/3, showView.frame.size.height-(showView.frame.size.height/2.8))];
     ghazalTextView.text=[verses objectAtIndex:state];
     ghazalTextView.font=[UIFont fontWithName:@"Iranian Sans" size:fontState];
+    [ghazalTextView setBackgroundColor:[UIColor clearColor]];
     ghazalTextView.editable=NO;
     ghazalTextView.textAlignment=NSTextAlignmentCenter;
     [showView addSubview:ghazalTextView];
@@ -191,6 +181,25 @@
         [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         button.layer.cornerRadius= ScreenWidth/13;
         button.backgroundColor=[UIColor blueColor];
+        
+        
+        
+        //creating subviews of show view
+        next=[[UIButton alloc]initWithFrame:CGRectMake(0.2*showView.frame.size.width/7, 1.25*showView.frame.size.height/3, showView.frame.size.height/15, showView.frame.size.height/7)];
+        next.alpha=0.15;
+        [next setBackgroundImage:[UIImage imageNamed:@"per-button.png"] forState:UIControlStateNormal];
+      //  next.layer.cornerRadius=(showView.frame.size.height/15)/2;
+        [next addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
+        [showView addSubview:next];
+        
+        previous=[[UIButton alloc]initWithFrame:CGRectMake(6*showView.frame.size.width/7,1.25*showView.frame.size.height/3, showView.frame.size.height/15, showView.frame.size.height/7)];
+        previous.alpha=0.15;
+        
+        [previous setBackgroundImage:[UIImage imageNamed:@"next-button.png"] forState:UIControlStateNormal];
+      //  previous.layer.cornerRadius=(showView.frame.size.height/15)/2;
+        [previous addTarget:self action:@selector(goToPrevious:) forControlEvents:UIControlEventTouchUpInside];
+        [showView addSubview:previous];
+        
         //button.titleLabel.font=[UIFont fontWithName:@"Arial" size:12];
         [button setBackgroundImage:[horizontalIconImage objectAtIndex:i] forState:UIControlStateNormal];
         [showView addSubview:button];

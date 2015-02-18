@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E824BE7D1A951F36007B89B0 /* next-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E824BE7B1A951F36007B89B0 /* next-button.png */; };
+		E824BE7E1A951F36007B89B0 /* per-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E824BE7C1A951F36007B89B0 /* per-button.png */; };
 		E8399AE21A90B61C009A9C80 /* hafez.txt in Resources */ = {isa = PBXBuildFile; fileRef = E8399AE11A90B61C009A9C80 /* hafez.txt */; };
 		E8547D981A91F67400E71085 /* zendeginameh.txt in Resources */ = {isa = PBXBuildFile; fileRef = E8547D971A91F67400E71085 /* zendeginameh.txt */; };
 		E855ADFA1A93184E00946EEB /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = E855ADF11A93184E00946EEB /* close.png */; };
@@ -57,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E824BE7B1A951F36007B89B0 /* next-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-button.png"; sourceTree = "<group>"; };
+		E824BE7C1A951F36007B89B0 /* per-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "per-button.png"; sourceTree = "<group>"; };
 		E8399AE11A90B61C009A9C80 /* hafez.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hafez.txt; sourceTree = "<group>"; };
 		E8547D971A91F67400E71085 /* zendeginameh.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zendeginameh.txt; sourceTree = "<group>"; };
 		E855ADF11A93184E00946EEB /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		E855AE041A9318BA00946EEB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				E824BE7B1A951F36007B89B0 /* next-button.png */,
+				E824BE7C1A951F36007B89B0 /* per-button.png */,
 				E855AE1E1A93522D00946EEB /* fall.jpg */,
 				E855AE181A9334F000946EEB /* splash.jpg */,
 				E855AE081A9320FF00946EEB /* ghazal-num-back.png */,
@@ -357,6 +363,8 @@
 				E855ADFE1A93184E00946EEB /* home.png in Resources */,
 				E855ADFC1A93184E00946EEB /* font-plus.png in Resources */,
 				E8F873371A8A4428001C480C /* LaunchScreen.xib in Resources */,
+				E824BE7D1A951F36007B89B0 /* next-button.png in Resources */,
+				E824BE7E1A951F36007B89B0 /* per-button.png in Resources */,
 				E855AE231A9354D500946EEB /* back2.png in Resources */,
 				E855AE071A931CA100946EEB /* liked.png in Resources */,
 				E855ADFF1A93184E00946EEB /* like.png in Resources */,
