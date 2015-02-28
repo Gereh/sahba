@@ -16,9 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-
-    faalOn=NO;
+    
+      faalOn=NO;
     isOnShowPage=NO;
     plusIsOn=NO;
     isSearching=NO;
@@ -94,7 +93,7 @@
     logoView.image=[UIImage imageNamed:@"menu-logo.jpg"];
  
     [homeView addSubview:logoView];
-    buttonsTitle=[[NSArray alloc]initWithObjects:@"غزل",@"زندگی نامه",@"فال",@"جست و جو",@"علاقه مندی ها", nil];
+    buttonsTitle=[[NSArray alloc]initWithObjects:@"غزلیات حافظ",@"زندگی نامه",@"فال",@"جست و جو",@"علاقه مندی ها", nil];
    
     
     NSLog(@"height:%f",ScreenHeight);  NSLog(@"height:%f",ScreenWidth);
@@ -182,24 +181,6 @@
         button.layer.cornerRadius= ScreenWidth/13;
         button.backgroundColor=[UIColor blueColor];
         
-        
-        
-        //creating subviews of show view
-        next=[[UIButton alloc]initWithFrame:CGRectMake(0.2*showView.frame.size.width/7, 1.25*showView.frame.size.height/3, showView.frame.size.height/15, showView.frame.size.height/7)];
-        next.alpha=0.15;
-        [next setBackgroundImage:[UIImage imageNamed:@"per-button.png"] forState:UIControlStateNormal];
-      //  next.layer.cornerRadius=(showView.frame.size.height/15)/2;
-        [next addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
-        [showView addSubview:next];
-        
-        previous=[[UIButton alloc]initWithFrame:CGRectMake(6*showView.frame.size.width/7,1.25*showView.frame.size.height/3, showView.frame.size.height/15, showView.frame.size.height/7)];
-        previous.alpha=0.15;
-        
-        [previous setBackgroundImage:[UIImage imageNamed:@"next-button.png"] forState:UIControlStateNormal];
-      //  previous.layer.cornerRadius=(showView.frame.size.height/15)/2;
-        [previous addTarget:self action:@selector(goToPrevious:) forControlEvents:UIControlEventTouchUpInside];
-        [showView addSubview:previous];
-        
         //button.titleLabel.font=[UIFont fontWithName:@"Arial" size:12];
         [button setBackgroundImage:[horizontalIconImage objectAtIndex:i] forState:UIControlStateNormal];
         [showView addSubview:button];
@@ -207,6 +188,22 @@
         
         [horizontalButtons addObject:button];
     }
+    
+    //creating subviews of show view
+    next=[[UIButton alloc]initWithFrame:CGRectMake(0.01*showView.frame.size.width/9, 1.25*showView.frame.size.height/3, showView.frame.size.height/7, showView.frame.size.height/7)];
+    next.alpha=0.5;
+    [next setBackgroundImage:[UIImage imageNamed:@"per-button.png"] forState:UIControlStateNormal];
+    //  next.layer.cornerRadius=(showView.frame.size.height/15)/2;
+    [next addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
+    [showView addSubview:next];
+    
+    previous=[[UIButton alloc]initWithFrame:CGRectMake(5.5*showView.frame.size.width/7,1.25*showView.frame.size.height/3, showView.frame.size.height/7, showView.frame.size.height/7)];
+    previous.alpha=0.5;
+    
+    [previous setBackgroundImage:[UIImage imageNamed:@"next-button.png"] forState:UIControlStateNormal];
+    //  previous.layer.cornerRadius=(showView.frame.size.height/15)/2;
+    [previous addTarget:self action:@selector(goToPrevious:) forControlEvents:UIControlEventTouchUpInside];
+    [showView addSubview:previous];
     
     pickNumberView=[[UIView alloc]initWithFrame:showView.frame];
     pickNumberView.backgroundColor=[[UIColor whiteColor] colorWithAlphaComponent:0.7];
@@ -298,7 +295,9 @@
     
     zendeginaameTextView.text=zendeginame;
     zendeginaameTextView.textAlignment=NSTextAlignmentJustified;
+    
     zendeginaameTextView.font=[UIFont fontWithName:@"Iranian Sans" size:13];
+   
     zendeginaameTextView.editable=NO;
 
     UIBezierPath* aObjBezierPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 20, 20)];
@@ -328,14 +327,20 @@
     tapOnNumbers=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismiss123:)];
     tapOnNumbers.delegate=self;
     // Do any additional setup after loading the view, typically from a nib.
-}
 
--(void)viewWillAppear:(BOOL)animated{
     showView.transform=CGAffineTransformMakeTranslation(-showView.frame.size.width, 0);
     searchView.transform=CGAffineTransformMakeTranslation(searchView.frame.size.width, 0);
     favView.transform=CGAffineTransformMakeTranslation(-favView.frame.size.width, 0);
     dibView.transform=CGAffineTransformMakeTranslation(0, dibView.frame.size.height);
+
+
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"viewDidLoad");
+    
+
+  }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -350,7 +355,7 @@
    // [sender setEnabled:NO];
     isOnShowPage=YES;
     showView.transform=CGAffineTransformMakeTranslation(-showView.frame.size.width, 0);
-    if ([sender.titleLabel.text isEqualToString:@"غزل"]) {
+    if ([sender.titleLabel.text isEqualToString:@"غزلیات حافظ"]) {
         [UIView animateWithDuration:0.4 animations:^{
             showView.transform=CGAffineTransformMakeTranslation(0, 0);
             homeView.transform=CGAffineTransformMakeTranslation(homeView.frame.size.width, 0);
@@ -708,7 +713,7 @@
 
 
 #pragma mark actions-For-Vertical-Buttons
--(void)verticalButtonClicked:(UIButton*)sender
+-(IBAction)verticalButtonClicked:(UIButton*)sender
 {
     if ([sender.titleLabel.text isEqualToString:@"T+"]) {
         [self fontPlusAction];
@@ -733,10 +738,13 @@
         ghazalTextView.font=[UIFont fontWithName:@"Iranian Sans" size:fontState];
     }
 }
--(void)share:(UIButton*)sender
+-(IBAction)share:(UIButton*)sender
 {
     NSString *textToShare=ghazalTextView.text;
     NSURL *myWebsite = [NSURL URLWithString:@"http://www.google.com"];
+    
+    
+  
     
     UIActivityViewController *activityViewController =
     [[UIActivityViewController alloc] initWithActivityItems:@[textToShare,myWebsite ]
@@ -751,6 +759,7 @@
                              presentationController.sourceView = sender;
                          }
                      }];
+    
 
 }
 #pragma mark search methods
